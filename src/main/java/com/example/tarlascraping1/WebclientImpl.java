@@ -1,7 +1,9 @@
 package com.example.tarlascraping1;
 
-import com.example.tarlascraping1.Models.fieldModel;
-import com.example.tarlascraping1.Models.tokenModel;
+import com.example.tarlascraping1.Models.ScrapingResponse.FieldModel;
+import com.example.tarlascraping1.Models.Properties;
+import com.example.tarlascraping1.Models.ScrapingResponse.TokenModel;
+import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,12 +27,12 @@ public class WebclientImpl {
         headers.set("referer","https://tapusor.com/");
         headers.setContentLength(164);
         HttpEntity<String> entity = new HttpEntity<String>(uri,headers);
-        tokenModel object = restTemplate.exchange("https://backbone.tuvimer.com/v1/micro/getMicroToken", HttpMethod.POST,entity, tokenModel.class).getBody();
+        TokenModel object = restTemplate.exchange("https://backbone.tuvimer.com/v1/micro/getMicroToken", HttpMethod.POST,entity, TokenModel.class).getBody();
         return object.getToken();
     }
 
 
-    public ResponseEntity properties(String lat,String lng){
+    public Properties properties(String lat, String lng){
         RestTemplate restTemplate = new RestTemplate();
         String url="https://micro.tuvimer.com/tkgm/v1/getTKGMInfoCoordinate";
         String token = token();
@@ -53,8 +55,28 @@ public class WebclientImpl {
         map.put("base_params",map1);
         
         HttpEntity<HashMap> entity = new HttpEntity<>(map,headers);
-        fieldModel model1 = restTemplate.exchange(url,HttpMethod.POST,entity, fieldModel.class).getBody();
+        FieldModel model1 = restTemplate.exchange(url,HttpMethod.POST,entity, FieldModel.class).getBody();
         System.out.println(model1.ffff());
-        return new ResponseEntity(HttpStatus.OK);
+        return model1.getProperties();
     }
+
+    // https://canlidoviz.com/doviz-kurlari/kapali-carsi WİTH ABOUT SCRAPİNG
+    public Map<String, String> getRate(){
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://www.haremaltin.com/dashboard/ajax/doviz";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("host","www.haremaltin.com");
+        headers.set("X-Requested-With","XMLHttpRequest");
+        HttpEntity<Void>entity = new HttpEntity<>(headers);
+        Map<String,Object>object = restTemplate.exchange(url,HttpMethod.POST,entity,Map.class).getBody();
+        Map<String,Object>data = (Map<String, Object>) object.get("data");
+        JSONObject jsonObject = new JSONObject(data);
+        JSONObject usd = jsonObject.getJSONObject("USDTRY");
+        JSONObject euro = jsonObject.getJSONObject("EURTRY");
+        Map<String,String> rates = new HashMap<>();
+        rates.put("usd",usd.getString("satis"));
+        rates.put("euro",euro.getString("satis"));
+        return rates;
+    }
+
 }

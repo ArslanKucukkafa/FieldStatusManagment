@@ -1,0 +1,11 @@
+com/example/tarlascraping1/Repository/fieldReporsitory.class
+com/example/tarlascraping1/Models/base_params.class
+com/example/tarlascraping1/Models/Geometry.class
+com/example/tarlascraping1/TarlaScraping1Application.class
+com/example/tarlascraping1/Models/properties.class
+com/example/tarlascraping1/Models/tokenModel.class
+com/example/tarlascraping1/Models/coordinateModel.class
+com/example/tarlascraping1/Models/fieldModel.class
+com/example/tarlascraping1/Models/fielStatusModel.class
+com/example/tarlascraping1/Controller/tarlaController.class
+com/example/tarlascraping1/WebclientImpl.class
