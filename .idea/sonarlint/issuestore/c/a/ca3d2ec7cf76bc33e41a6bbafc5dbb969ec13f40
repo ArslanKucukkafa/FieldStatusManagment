@@ -1,0 +1,13 @@
+
+J
+java:S37409"/Provide the parametrized type for this generic.(§³Öþÿÿÿÿÿ
+t
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(—È€°øÿÿÿÿ
+Z
+java:S2259"DA "NullPointerException" could be thrown; "object" is nullable here.(Èûš‘
+_
+java:S2259H"DA "NullPointerException" could be thrown; "object" is nullable here.(ÏÂÊœüÿÿÿÿ
+Z
+java:S2259;"DA "NullPointerException" could be thrown; "model1" is nullable here.(ªÐÁÔ
+N	java:S106"9Replace this use of System.out or System.err by a logger.(’Ü™Ò
+N	java:S106;"9Replace this use of System.out or System.err by a logger.(ªÐÁÔ
